@@ -36,7 +36,7 @@ const TodoItem = ({ todo, onEdit, onDelete }: TodoItemProps) => {
           autoFocus
         />
         <View style={styles.buttonContainer}>
-          <Button title="SASASA" onPress={handleSave} />
+          <Button title="Salvar" onPress={handleSave} />
           <Button title="Cancelar" onPress={handleCancel} color="#999" />
         </View>
       </View>
