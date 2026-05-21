@@ -10,8 +10,14 @@
     "noFallthroughCasesInSwitch": true,
     "moduleResolution": "bundler",
     "isolatedModules": true,
-    "jsx": "react-native"
+    "jsx": "react-native",
+    "types": [
+      "jest"
+    ]
   },
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": [
+    "**/*.ts",
+    "**/*.tsx"
+  ],
   "extends": "expo/tsconfig.base"
 }
