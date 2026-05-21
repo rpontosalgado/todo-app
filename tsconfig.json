@@ -11,13 +11,8 @@
     "moduleResolution": "bundler",
     "isolatedModules": true,
     "jsx": "react-native",
-    "types": [
-      "jest"
-    ]
+    "types": ["jest"]
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx"
-  ],
+  "include": ["**/*.ts", "**/*.tsx"],
   "extends": "expo/tsconfig.base"
 }

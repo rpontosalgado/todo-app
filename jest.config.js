@@ -1,7 +1,9 @@
 module.exports = {
-  testEnvironment: "node",
+  testEnvironment: 'node',
   verbose: true,
-  testPathIgnorePatterns: ["/node_modules/", "/expo/"],
-  collectCoverageFrom: ["src/**/*.ts{,x}"],
-  coverageDirectory: "coverage",
+  testPathIgnorePatterns: ['/node_modules/', '/expo/'],
+  collectCoverageFrom: ['src/**/*.ts{,x}'],
+  coverageDirectory: 'coverage',
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],
+  testMatch: ['**/*.test.ts', '**/*.test.tsx'],
 };
