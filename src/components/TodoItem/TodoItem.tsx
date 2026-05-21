@@ -1,34 +1,34 @@
-import React from "react";
-import { Button, View } from "react-native";
-import { Todo } from "../../types";
-import * as S from "./TodoItem.styles";
+import React from 'react'
+import { Button, View } from 'react-native'
+import { Todo } from '../../types'
+import * as S from './TodoItem.styles'
 
 interface TodoItemProps {
-  todo: Todo;
-  onEdit: (id: string, name: string) => void;
-  onDelete: (id: string) => void;
+  todo: Todo
+  onEdit: (id: string, name: string) => void
+  onDelete: (id: string) => void
 }
 
 const TodoItem = ({ todo, onEdit, onDelete }: TodoItemProps) => {
-  const [isEditing, setIsEditing] = React.useState(false);
-  const [editName, setEditName] = React.useState(todo.name);
+  const [isEditing, setIsEditing] = React.useState(false)
+  const [editName, setEditName] = React.useState(todo.name)
 
   const handleSave = () => {
     if (editName.trim()) {
-      onEdit(todo.id, editName);
-      setIsEditing(false);
+      onEdit(todo.id, editName)
+      setIsEditing(false)
     }
-  };
+  }
 
   const handleCancel = () => {
-    setEditName(todo.name);
-    setIsEditing(false);
-  };
+    setEditName(todo.name)
+    setIsEditing(false)
+  }
 
   if (isEditing) {
     return (
       <S.Container>
-        <S.Label>Editar:</S.Label>
+        <S.LabelText>Editar:</S.LabelText>
         <S.Input
           value={editName}
           onChangeText={setEditName}
@@ -40,7 +40,7 @@ const TodoItem = ({ todo, onEdit, onDelete }: TodoItemProps) => {
           <Button title="Cancelar" onPress={handleCancel} color="#999" />
         </S.ButtonContainer>
       </S.Container>
-    );
+    )
   }
 
   return (
@@ -49,7 +49,7 @@ const TodoItem = ({ todo, onEdit, onDelete }: TodoItemProps) => {
         <View>
           <S.Name>{todo.name}</S.Name>
           <S.Date>
-            {new Date(todo.createdAt).toLocaleDateString("pt-BR")}
+            {new Date(todo.createdAt).toLocaleDateString('pt-BR')}
           </S.Date>
         </View>
       </S.Header>
@@ -62,7 +62,7 @@ const TodoItem = ({ todo, onEdit, onDelete }: TodoItemProps) => {
         />
       </S.Buttons>
     </S.Container>
-  );
-};
+  )
+}
 
-export { TodoItem };
+export { TodoItem }
