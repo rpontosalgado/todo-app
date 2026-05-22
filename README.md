@@ -74,14 +74,15 @@ yarn test --coverage
 
 ### Coverage
 
-| Metric | Value |
-|--------|-------|
-| Statements | 99% |
-| Branches | 85% |
-| Functions | 100% |
-| Lines | 99% |
+| Metric     | Value |
+| ---------- | ----- |
+| Statements | 99%   |
+| Branches   | 85%   |
+| Functions  | 100%  |
+| Lines      | 99%   |
 
 Covered modules:
+
 - `StorageService` — 6 tests (save, load, empty, errors)
 - `TodoContext` — 8 tests (CRUD, loading, persistence)
 - `TodoItem` — 7 tests (render, edit, save, cancel, delete)
@@ -104,5 +105,3 @@ yarn format
 ```
 
 ## Screenshots
-
-<!-- Add screenshots here -->
