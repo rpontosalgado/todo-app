@@ -104,17 +104,22 @@ yarn lint:fix
 yarn format
 ```
 
+## Commit & Push Workflow
+  
+This project enforces conventional commits and quality checks via Git hooks (Husky).
+
+| Hook | Trigger | Action |
+|------|---------|--------|
+| `commit-msg` | `git commit` | Validates message format via commitlint |
+| `prepare-commit-msg` | `git commit` | Launches commitizen interactive prompt |
+| `pre-push` | `git push` | Runs linting and all tests |
+
+
 ## Screenshots
+| Empty list | List with items |
+|------------|-----------------|
+| <img width="400" alt="Empty state" src="https://github.com/user-attachments/assets/3b385513-e13d-4392-8343-5a288869eb83" /> | <img width="400" alt="List with items" src="https://github.com/user-attachments/assets/1b13c210-f2f3-4d54-b838-e99385fdd92c" /> |
 
-### Empty state
-<img width="400" alt="Empty state" src="https://github.com/user-attachments/assets/3b385513-e13d-4392-8343-5a288869eb83" />
-
-### List with items
-<img width="400" alt="List with items" src="https://github.com/user-attachments/assets/1b13c210-f2f3-4d54-b838-e99385fdd92c" />
-
-###  Editing an item
-<img width="400" alt=" Editing an item" src="https://github.com/user-attachments/assets/d0392ed5-ce0a-471f-a767-f260a46bbae5" />
-
-### Delete confirmation
-<img width="400" alt="Delete confirmation" src="https://github.com/user-attachments/assets/9eb63780-4376-428e-8238-1dac2297dced" />
-
+| Editing an item | Delete confirmation |
+|-----------------|---------------------|
+| <img width="400" alt=" Editing an item" src="https://github.com/user-attachments/assets/d0392ed5-ce0a-471f-a767-f260a46bbae5" /> | <img width="400" alt="Delete confirmation" src="https://github.com/user-attachments/assets/9eb63780-4376-428e-8238-1dac2297dced" /> |
