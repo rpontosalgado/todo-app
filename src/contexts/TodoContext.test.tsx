@@ -29,18 +29,22 @@ describe("TodoContext", () => {
 
     const { result } = renderHook(() => useTodoContext(), { wrapper });
 
+    expect(result.current.loading).toBe(true);
+
     await waitFor(() => {
       expect(result.current.todos).toEqual(storedTodos);
     });
+    expect(result.current.loading).toBe(false);
     expect(StorageService.loadTodos).toHaveBeenCalledTimes(1);
   });
 
-  it("should start with empty todos when storage is empty", async () => {
+  it("should finish loading even when storage is empty", async () => {
     const { result } = renderHook(() => useTodoContext(), { wrapper });
 
     await waitFor(() => {
-      expect(result.current.todos).toEqual([]);
+      expect(result.current.loading).toBe(false);
     });
+    expect(result.current.todos).toEqual([]);
   });
 
   it("should add a todo", async () => {

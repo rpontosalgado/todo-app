@@ -4,6 +4,7 @@ import { StorageService } from "../services/StorageService";
 
 export interface TodoContextType {
   todos: Todo[];
+  loading: boolean;
   addTodo: (name: string) => void;
   updateTodo: (id: string, name: string) => void;
   deleteTodo: (id: string) => void;
@@ -25,10 +26,12 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [todos, setTodos] = useState<Todo[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const loadTodos = useCallback(async () => {
     const storedTodos = await StorageService.loadTodos();
     setTodos(storedTodos);
+    setLoading(false);
   }, []);
 
   useEffect(() => {
@@ -70,7 +73,7 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
   );
 
   return (
-    <TodoContext.Provider value={{ todos, addTodo, updateTodo, deleteTodo }}>
+    <TodoContext.Provider value={{ todos, loading, addTodo, updateTodo, deleteTodo }}>
       {children}
     </TodoContext.Provider>
   );
