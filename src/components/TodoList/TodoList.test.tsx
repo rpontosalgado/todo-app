@@ -1,12 +1,12 @@
-jest.mock('@react-native-async-storage/async-storage', () => ({
-  getItem: jest.fn(),
-  setItem: jest.fn(),
-}));
-
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
 import { TodoList } from './TodoList';
 import { TodoContext } from '../../contexts/TodoContext';
+
+jest.mock('@react-native-async-storage/async-storage', () => ({
+  getItem: jest.fn(),
+  setItem: jest.fn(),
+}));
 
 const mockContextValue = {
   todos: [
