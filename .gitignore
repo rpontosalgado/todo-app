@@ -9,3 +9,12 @@ watchman.log
 expo/
 package-lock.json
 .npm
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+.env
+.env.*
+*.tsbuildinfo
