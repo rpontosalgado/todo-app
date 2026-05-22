@@ -13,9 +13,20 @@ const mockContextValue = {
     { id: "1", name: "First", createdAt: 1000 },
     { id: "2", name: "Second", createdAt: 2000 },
   ],
+  loading: false,
   addTodo: jest.fn(),
   updateTodo: jest.fn(),
   deleteTodo: jest.fn(),
+};
+
+const emptyContextValue = {
+  ...mockContextValue,
+  todos: [],
+};
+
+const loadingContextValue = {
+  ...mockContextValue,
+  loading: true,
 };
 
 const renderWithContext = (contextValue = mockContextValue) =>
@@ -98,5 +109,65 @@ describe("TodoList", () => {
     const { toJSON } = render(<TodoList />);
 
     expect(toJSON()).toBeNull();
+  });
+
+  it("should show loading indicator when loading", () => {
+    const { getByText } = renderWithContext(loadingContextValue);
+
+    expect(getByText("Carregando...")).toBeTruthy();
+  });
+
+  it("should show empty state when no todos", () => {
+    const { getByText } = renderWithContext(emptyContextValue);
+
+    expect(getByText("Nenhuma tarefa")).toBeTruthy();
+  });
+
+  it("should show delete confirmation modal on Remover press", () => {
+    const { getAllByText, getByText, queryByText } = renderWithContext();
+
+    fireEvent.press(getAllByText("Remover")[0]);
+
+    expect(getByText("Confirmar exclusão")).toBeTruthy();
+    expect(queryByText("Cancelar")).toBeTruthy();
+  });
+
+  it("should delete todo on modal confirmation", () => {
+    const { getAllByText } = renderWithContext();
+
+    fireEvent.press(getAllByText("Remover")[0]);
+
+    const removeButtons = getAllByText("Remover");
+    const modalRemoveButton = removeButtons[removeButtons.length - 1];
+    fireEvent.press(modalRemoveButton);
+
+    expect(mockContextValue.deleteTodo).toHaveBeenCalledWith("1");
+  });
+
+  it("should cancel delete when dismissing modal", () => {
+    const { getAllByText, getByText, queryByText } = renderWithContext();
+
+    fireEvent.press(getAllByText("Remover")[0]);
+    fireEvent.press(getByText("Cancelar"));
+
+    expect(mockContextValue.deleteTodo).not.toHaveBeenCalled();
+    expect(queryByText("Confirmar exclusão")).toBeNull();
+  });
+
+  it("should disable add button when input is empty", () => {
+    const { getByText } = renderWithContext();
+    const button = getByText("Adicionar");
+
+    expect(button.props.disabled).toBe(true);
+  });
+
+  it("should enable add button when input has text", () => {
+    const { getByText, getByPlaceholderText } = renderWithContext();
+    const input = getByPlaceholderText("Adicionar novo item...");
+
+    fireEvent.changeText(input, "New todo");
+    const button = getByText("Adicionar");
+
+    expect(button.props.disabled).toBe(false);
   });
 });
