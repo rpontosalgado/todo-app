@@ -1113,7 +1113,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/cli@npm:21.0.1":
+"@commitlint/cli@npm:^21.0.1":
   version: 21.0.1
   resolution: "@commitlint/cli@npm:21.0.1"
   dependencies:
@@ -1130,7 +1130,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/config-conventional@npm:21.0.1":
+"@commitlint/config-conventional@npm:^21.0.1":
   version: 21.0.1
   resolution: "@commitlint/config-conventional@npm:21.0.1"
   dependencies:
@@ -3879,7 +3879,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commitizen@npm:4.3.1, commitizen@npm:^4.0.3":
+"commitizen@npm:^4.0.3, commitizen@npm:^4.3.1":
   version: 4.3.1
   resolution: "commitizen@npm:4.3.1"
   dependencies:
@@ -10012,8 +10012,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "todo-app@workspace:."
   dependencies:
-    "@commitlint/cli": "npm:21.0.1"
-    "@commitlint/config-conventional": "npm:21.0.1"
+    "@commitlint/cli": "npm:^21.0.1"
+    "@commitlint/config-conventional": "npm:^21.0.1"
     "@expo/metro-runtime": "npm:~6.1.2"
     "@react-native-async-storage/async-storage": "npm:2.2.0"
     "@testing-library/jest-native": "npm:^5.4.3"
@@ -10025,7 +10025,7 @@ __metadata:
     "@types/styled-components-react-native": "npm:^5.2.5"
     "@typescript-eslint/eslint-plugin": "npm:^8.59.4"
     "@typescript-eslint/parser": "npm:^8.59.4"
-    commitizen: "npm:4.3.1"
+    commitizen: "npm:^4.3.1"
     cz-conventional-changelog: "npm:3.3.0"
     eslint: "npm:^8.57.0"
     eslint-config-prettier: "npm:^9.1.0"
