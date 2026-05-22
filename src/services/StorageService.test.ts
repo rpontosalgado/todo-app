@@ -48,4 +48,55 @@ describe("StorageService", () => {
 
     expect(loadedTodos).toEqual([]);
   });
+
+  it("should handle save todos error gracefully", async () => {
+    const consoleErrorSpy = jest
+      .spyOn(console, "error")
+      .mockImplementation(() => {});
+    (AsyncStorage.setItem as jest.Mock).mockRejectedValue(
+      new Error("Storage full"),
+    );
+
+    await StorageService.saveTodos(mockTodos);
+
+    expect(consoleErrorSpy).toHaveBeenCalledWith(
+      "Error saving todos:",
+      expect.any(Error),
+    );
+    consoleErrorSpy.mockRestore();
+  });
+
+  it("should handle load todos error gracefully", async () => {
+    const consoleErrorSpy = jest
+      .spyOn(console, "error")
+      .mockImplementation(() => {});
+    (AsyncStorage.getItem as jest.Mock).mockRejectedValue(
+      new Error("Disk error"),
+    );
+
+    const loadedTodos = await StorageService.loadTodos();
+
+    expect(loadedTodos).toEqual([]);
+    expect(consoleErrorSpy).toHaveBeenCalledWith(
+      "Error loading todos:",
+      expect.any(Error),
+    );
+    consoleErrorSpy.mockRestore();
+  });
+
+  it("should handle malformed JSON when loading todos", async () => {
+    const consoleErrorSpy = jest
+      .spyOn(console, "error")
+      .mockImplementation(() => {});
+    (AsyncStorage.getItem as jest.Mock).mockResolvedValue("not-valid-json");
+
+    const loadedTodos = await StorageService.loadTodos();
+
+    expect(loadedTodos).toEqual([]);
+    expect(consoleErrorSpy).toHaveBeenCalledWith(
+      "Error loading todos:",
+      expect.any(SyntaxError),
+    );
+    consoleErrorSpy.mockRestore();
+  });
 });
