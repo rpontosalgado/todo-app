@@ -137,6 +137,7 @@ This project enforces conventional commits and quality checks via Git hooks (Hus
 - Selecionar múltiplas tarefas e excluir em lote
 
 ### Técnico
+- Tema global (cores, espaçamento, tipografia) via styled-components ThemeProvider
 - Pipeline de CI/CD com GitHub Actions
 - Animações nas transições de adicionar/remover itens
 - Melhorias de acessibilidade (leitor de tela)
