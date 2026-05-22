@@ -38,14 +38,18 @@ For iOS, press `i` in the Expo terminal. For Android, press `a`.
 ```
 src/
   components/
-    TodoItem/         # Individual todo card with edit/delete
-    TodoList/         # Main list with add input and empty state
+    TodoItem/                    # Individual todo card with edit/delete
+    TodoList/
+      LoadingView/               # Loading indicator
+      EmptyState/                # Empty state with call-to-action
+      DeleteConfirmModal/        # Delete confirmation modal
+      TodoList.tsx               # Main list orchestrator
   contexts/
-    TodoContext.tsx   # State management and persistence
+    TodoContext.tsx              # State management and persistence
   services/
-    StorageService.ts # AsyncStorage wrapper
+    StorageService.ts            # AsyncStorage wrapper
   types/
-    index.ts          # TypeScript type definitions
+    index.ts                     # TypeScript type definitions
 ```
 
 ## Features
@@ -81,7 +85,10 @@ Covered modules:
 - `StorageService` — 6 tests (save, load, empty, errors)
 - `TodoContext` — 8 tests (CRUD, loading, persistence)
 - `TodoItem` — 7 tests (render, edit, save, cancel, delete)
-- `TodoList` — 16 tests (render, add, input validation, modal, loading, empty)
+- `TodoList` — 14 tests (render, add, input validation, modal orchestration)
+- `LoadingView` — 1 test (render)
+- `EmptyState` — 2 tests (render, call-to-action)
+- `DeleteConfirmModal` — 3 tests (render, confirm, cancel)
 
 ## Linting
 
