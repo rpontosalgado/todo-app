@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect, useCallback } from "react";
+import React, { createContext, useState, useEffect, useCallback, useContext } from "react";
 import { Todo } from "../types";
 import { StorageService } from "../services/StorageService";
 
@@ -12,6 +12,14 @@ export interface TodoContextType {
 export const TodoContext = createContext<TodoContextType | undefined>(
   undefined,
 );
+
+export const useTodoContext = () => {
+  const context = useContext(TodoContext);
+  if (!context) {
+    throw new Error("useTodoContext must be used within a TodoProvider");
+  }
+  return context;
+};
 
 export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
