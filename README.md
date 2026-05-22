@@ -21,7 +21,7 @@ A React Native (Expo) to-do list app built with TypeScript, featuring CRUD opera
 
 ```bash
 # Clone the repository
-git clone <repo-url>
+git clone https://github.com/rpontosalgado/todo-app.git
 cd todo-app
 
 # Install dependencies
@@ -105,3 +105,16 @@ yarn format
 ```
 
 ## Screenshots
+
+### Empty state
+<img width="400" alt="Empty state" src="https://github.com/user-attachments/assets/3b385513-e13d-4392-8343-5a288869eb83" />
+
+### List with items
+<img width="400" alt="List with items" src="https://github.com/user-attachments/assets/1b13c210-f2f3-4d54-b838-e99385fdd92c" />
+
+###  Editing an item
+<img width="400" alt=" Editing an item" src="https://github.com/user-attachments/assets/d0392ed5-ce0a-471f-a767-f260a46bbae5" />
+
+### Delete confirmation
+<img width="400" alt="Delete confirmation" src="https://github.com/user-attachments/assets/9eb63780-4376-428e-8238-1dac2297dced" />
+
