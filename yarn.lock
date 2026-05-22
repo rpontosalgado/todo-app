@@ -4112,7 +4112,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cz-conventional-changelog@npm:3.3.0":
+"cz-conventional-changelog@npm:3.3.0, cz-conventional-changelog@npm:^3.3.0":
   version: 3.3.0
   resolution: "cz-conventional-changelog@npm:3.3.0"
   dependencies:
@@ -5747,7 +5747,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"husky@npm:9.1.7":
+"husky@npm:^9.1.7":
   version: 9.1.7
   resolution: "husky@npm:9.1.7"
   bin:
@@ -10026,14 +10026,14 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^8.59.4"
     "@typescript-eslint/parser": "npm:^8.59.4"
     commitizen: "npm:^4.3.1"
-    cz-conventional-changelog: "npm:3.3.0"
+    cz-conventional-changelog: "npm:^3.3.0"
     eslint: "npm:^8.57.0"
     eslint-config-prettier: "npm:^9.1.0"
     eslint-plugin-react: "npm:^7.35.0"
     eslint-plugin-react-native: "npm:^4.1.0"
     expo: "npm:~54.0.33"
     expo-status-bar: "npm:~3.0.9"
-    husky: "npm:9.1.7"
+    husky: "npm:^9.1.7"
     jest: "npm:^29.7.0"
     prettier: "npm:^3.8.3"
     react: "npm:19.1.0"
