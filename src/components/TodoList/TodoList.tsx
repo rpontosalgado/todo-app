@@ -1,12 +1,10 @@
 import React, { useContext, useState } from "react";
-import {
-  ActivityIndicator,
-  Button,
-  FlatList,
-  Modal,
-} from "react-native";
+import { Button, FlatList } from "react-native";
 import { TodoContext } from "../../contexts/TodoContext";
 import { TodoItem } from "../TodoItem/TodoItem";
+import { LoadingView } from "./LoadingView/LoadingView";
+import { EmptyState } from "./EmptyState/EmptyState";
+import { DeleteConfirmModal } from "./DeleteConfirmModal/DeleteConfirmModal";
 import * as S from "./TodoList.styles";
 
 const TodoList = () => {
@@ -42,12 +40,7 @@ const TodoList = () => {
   };
 
   if (loading) {
-    return (
-      <S.LoadingContainer>
-        <ActivityIndicator size="large" color="#007AFF" />
-        <S.LoadingText>Carregando...</S.LoadingText>
-      </S.LoadingContainer>
-    );
+    return <LoadingView />;
   }
 
   return (
@@ -68,13 +61,7 @@ const TodoList = () => {
         />
       </S.AddContainer>
       {todos.length === 0 ? (
-        <S.EmptyContainer>
-          <S.EmptyIcon>📋</S.EmptyIcon>
-          <S.EmptyTitle>Nenhuma tarefa</S.EmptyTitle>
-          <S.EmptyText>
-            Adicione uma nova tarefa usando o campo acima.
-          </S.EmptyText>
-        </S.EmptyContainer>
+        <EmptyState />
       ) : (
         <FlatList
           data={todos}
@@ -89,29 +76,11 @@ const TodoList = () => {
           contentContainerStyle={S.ListContent}
         />
       )}
-      <Modal
+      <DeleteConfirmModal
         visible={deleteConfirmId !== null}
-        transparent
-        animationType="fade"
-        onRequestClose={handleCancelDelete}
-      >
-        <S.ModalOverlay>
-          <S.ModalContent>
-            <S.ModalTitle>Confirmar exclusão</S.ModalTitle>
-            <S.ModalText>
-              Tem certeza que deseja remover esta tarefa?
-            </S.ModalText>
-            <S.ModalButtons>
-              <Button title="Cancelar" onPress={handleCancelDelete} color="#999" />
-              <Button
-                title="Remover"
-                onPress={handleConfirmDelete}
-                color="#f44336"
-              />
-            </S.ModalButtons>
-          </S.ModalContent>
-        </S.ModalOverlay>
-      </Modal>
+        onConfirm={handleConfirmDelete}
+        onCancel={handleCancelDelete}
+      />
     </S.Container>
   );
 };

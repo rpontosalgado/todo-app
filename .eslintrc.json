@@ -41,12 +41,10 @@
         "skip": [
           "S.TitleText",
           "S.LabelText",
-          "S.LoadingText",
-          "S.EmptyIcon",
-          "S.EmptyTitle",
-          "S.EmptyText",
-          "S.ModalTitle",
-          "S.ModalText"
+          "S.Text",
+          "S.Icon",
+          "S.Title",
+          "S.Description"
         ]
       }
     ],
