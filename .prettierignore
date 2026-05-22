@@ -1,6 +1,5 @@
 node_modules
 expo
-android
 ios
 .expo
 .git
@@ -10,3 +9,4 @@ build
 package-lock.json
 yarn.lock
 jest.config.js
+.yarn
