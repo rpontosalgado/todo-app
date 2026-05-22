@@ -1,6 +1,6 @@
-import React from "react";
-import { ActivityIndicator } from "react-native";
-import * as S from "./LoadingView.styles";
+import React from 'react';
+import { ActivityIndicator } from 'react-native';
+import * as S from './LoadingView.styles';
 
 const LoadingView = () => (
   <S.Container>

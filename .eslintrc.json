@@ -38,14 +38,7 @@
     "react-native/no-raw-text": [
       "error",
       {
-        "skip": [
-          "S.TitleText",
-          "S.LabelText",
-          "S.Text",
-          "S.Icon",
-          "S.Title",
-          "S.Description"
-        ]
+        "skip": ["S.TitleText", "S.LabelText", "S.Text", "S.Icon", "S.Title", "S.Description"]
       }
     ],
     "no-unused-vars": "off",

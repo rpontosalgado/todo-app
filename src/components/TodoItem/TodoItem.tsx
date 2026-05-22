@@ -1,7 +1,7 @@
-import React from "react";
-import { Button, View } from "react-native";
-import { Todo } from "../../types";
-import * as S from "./TodoItem.styles";
+import React from 'react';
+import { Button, View } from 'react-native';
+import { Todo } from '../../types';
+import * as S from './TodoItem.styles';
 
 interface TodoItemProps {
   todo: Todo;
@@ -29,12 +29,7 @@ const TodoItem = ({ todo, onEdit, onDelete }: TodoItemProps) => {
     return (
       <S.Container>
         <S.LabelText>Editar:</S.LabelText>
-        <S.Input
-          value={editName}
-          onChangeText={setEditName}
-          onBlur={handleSave}
-          autoFocus
-        />
+        <S.Input value={editName} onChangeText={setEditName} onBlur={handleSave} autoFocus />
         <S.ButtonContainer>
           <Button title="Salvar" onPress={handleSave} />
           <Button title="Cancelar" onPress={handleCancel} color="#999" />
@@ -48,18 +43,12 @@ const TodoItem = ({ todo, onEdit, onDelete }: TodoItemProps) => {
       <S.Header>
         <View>
           <S.Name>{todo.name}</S.Name>
-          <S.Date>
-            {new Date(todo.createdAt).toLocaleDateString("pt-BR")}
-          </S.Date>
+          <S.Date>{new Date(todo.createdAt).toLocaleDateString('pt-BR')}</S.Date>
         </View>
       </S.Header>
       <S.Buttons>
         <Button title="Editar" onPress={() => setIsEditing(true)} />
-        <Button
-          title="Remover"
-          onPress={() => onDelete(todo.id)}
-          color="#f44336"
-        />
+        <Button title="Remover" onPress={() => onDelete(todo.id)} color="#f44336" />
       </S.Buttons>
     </S.Container>
   );

@@ -1,9 +1,9 @@
-import React from "react";
-import { renderHook, act, waitFor } from "@testing-library/react-native";
-import { TodoProvider, useTodoContext } from "./TodoContext";
-import { StorageService } from "../services/StorageService";
+import React from 'react';
+import { renderHook, act, waitFor } from '@testing-library/react-native';
+import { TodoProvider, useTodoContext } from './TodoContext';
+import { StorageService } from '../services/StorageService';
 
-jest.mock("../services/StorageService", () => ({
+jest.mock('../services/StorageService', () => ({
   StorageService: {
     saveTodos: jest.fn(),
     loadTodos: jest.fn(),
@@ -14,17 +14,15 @@ const wrapper = ({ children }: { children: React.ReactNode }) => (
   <TodoProvider>{children}</TodoProvider>
 );
 
-describe("TodoContext", () => {
+describe('TodoContext', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     (StorageService.loadTodos as jest.Mock).mockResolvedValue([]);
     (StorageService.saveTodos as jest.Mock).mockResolvedValue(undefined);
   });
 
-  it("should load todos on mount", async () => {
-    const storedTodos = [
-      { id: "1", name: "Existing", createdAt: 1000 },
-    ];
+  it('should load todos on mount', async () => {
+    const storedTodos = [{ id: '1', name: 'Existing', createdAt: 1000 }];
     (StorageService.loadTodos as jest.Mock).mockResolvedValue(storedTodos);
 
     const { result } = renderHook(() => useTodoContext(), { wrapper });
@@ -38,7 +36,7 @@ describe("TodoContext", () => {
     expect(StorageService.loadTodos).toHaveBeenCalledTimes(1);
   });
 
-  it("should finish loading even when storage is empty", async () => {
+  it('should finish loading even when storage is empty', async () => {
     const { result } = renderHook(() => useTodoContext(), { wrapper });
 
     await waitFor(() => {
@@ -47,7 +45,7 @@ describe("TodoContext", () => {
     expect(result.current.todos).toEqual([]);
   });
 
-  it("should add a todo", async () => {
+  it('should add a todo', async () => {
     const { result } = renderHook(() => useTodoContext(), { wrapper });
 
     await waitFor(() => {
@@ -55,22 +53,18 @@ describe("TodoContext", () => {
     });
 
     await act(async () => {
-      result.current.addTodo("Buy milk");
+      result.current.addTodo('Buy milk');
     });
 
     expect(result.current.todos).toHaveLength(1);
-    expect(result.current.todos[0].name).toBe("Buy milk");
+    expect(result.current.todos[0].name).toBe('Buy milk');
     expect(result.current.todos[0].id).toEqual(expect.any(String));
     expect(result.current.todos[0].createdAt).toEqual(expect.any(Number));
-    expect(StorageService.saveTodos).toHaveBeenCalledWith(
-      result.current.todos,
-    );
+    expect(StorageService.saveTodos).toHaveBeenCalledWith(result.current.todos);
   });
 
-  it("should append new todo to existing todos", async () => {
-    const storedTodos = [
-      { id: "1", name: "First", createdAt: 1000 },
-    ];
+  it('should append new todo to existing todos', async () => {
+    const storedTodos = [{ id: '1', name: 'First', createdAt: 1000 }];
     (StorageService.loadTodos as jest.Mock).mockResolvedValue(storedTodos);
 
     const { result } = renderHook(() => useTodoContext(), { wrapper });
@@ -80,18 +74,18 @@ describe("TodoContext", () => {
     });
 
     await act(async () => {
-      result.current.addTodo("Second");
+      result.current.addTodo('Second');
     });
 
     expect(result.current.todos).toHaveLength(2);
-    expect(result.current.todos[0].name).toBe("First");
-    expect(result.current.todos[1].name).toBe("Second");
+    expect(result.current.todos[0].name).toBe('First');
+    expect(result.current.todos[1].name).toBe('Second');
   });
 
-  it("should update a todo by id", async () => {
+  it('should update a todo by id', async () => {
     const storedTodos = [
-      { id: "1", name: "Old name", createdAt: 1000 },
-      { id: "2", name: "Keep me", createdAt: 2000 },
+      { id: '1', name: 'Old name', createdAt: 1000 },
+      { id: '2', name: 'Keep me', createdAt: 2000 },
     ];
     (StorageService.loadTodos as jest.Mock).mockResolvedValue(storedTodos);
 
@@ -102,20 +96,16 @@ describe("TodoContext", () => {
     });
 
     await act(async () => {
-      result.current.updateTodo("1", "New name");
+      result.current.updateTodo('1', 'New name');
     });
 
-    expect(result.current.todos[0].name).toBe("New name");
-    expect(result.current.todos[1].name).toBe("Keep me");
-    expect(StorageService.saveTodos).toHaveBeenCalledWith(
-      result.current.todos,
-    );
+    expect(result.current.todos[0].name).toBe('New name');
+    expect(result.current.todos[1].name).toBe('Keep me');
+    expect(StorageService.saveTodos).toHaveBeenCalledWith(result.current.todos);
   });
 
-  it("should not modify todos when updating non-existent id", async () => {
-    const storedTodos = [
-      { id: "1", name: "Only one", createdAt: 1000 },
-    ];
+  it('should not modify todos when updating non-existent id', async () => {
+    const storedTodos = [{ id: '1', name: 'Only one', createdAt: 1000 }];
     (StorageService.loadTodos as jest.Mock).mockResolvedValue(storedTodos);
 
     const { result } = renderHook(() => useTodoContext(), { wrapper });
@@ -125,16 +115,16 @@ describe("TodoContext", () => {
     });
 
     await act(async () => {
-      result.current.updateTodo("999", "Ghost");
+      result.current.updateTodo('999', 'Ghost');
     });
 
     expect(result.current.todos).toEqual(storedTodos);
   });
 
-  it("should delete a todo by id", async () => {
+  it('should delete a todo by id', async () => {
     const storedTodos = [
-      { id: "1", name: "Delete me", createdAt: 1000 },
-      { id: "2", name: "Keep me", createdAt: 2000 },
+      { id: '1', name: 'Delete me', createdAt: 1000 },
+      { id: '2', name: 'Keep me', createdAt: 2000 },
     ];
     (StorageService.loadTodos as jest.Mock).mockResolvedValue(storedTodos);
 
@@ -145,17 +135,15 @@ describe("TodoContext", () => {
     });
 
     await act(async () => {
-      result.current.deleteTodo("1");
+      result.current.deleteTodo('1');
     });
 
     expect(result.current.todos).toHaveLength(1);
-    expect(result.current.todos[0].id).toBe("2");
-    expect(StorageService.saveTodos).toHaveBeenCalledWith(
-      result.current.todos,
-    );
+    expect(result.current.todos[0].id).toBe('2');
+    expect(StorageService.saveTodos).toHaveBeenCalledWith(result.current.todos);
   });
 
-  it("should persist after every mutation", async () => {
+  it('should persist after every mutation', async () => {
     const { result } = renderHook(() => useTodoContext(), { wrapper });
 
     await waitFor(() => {
@@ -163,7 +151,7 @@ describe("TodoContext", () => {
     });
 
     await act(async () => {
-      result.current.addTodo("A");
+      result.current.addTodo('A');
     });
     expect(StorageService.saveTodos).toHaveBeenCalledTimes(1);
 

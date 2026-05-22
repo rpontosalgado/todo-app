@@ -1,6 +1,6 @@
-import React from "react";
-import { Button, Modal } from "react-native";
-import * as S from "./DeleteConfirmModal.styles";
+import React from 'react';
+import { Button, Modal } from 'react-native';
+import * as S from './DeleteConfirmModal.styles';
 
 interface DeleteConfirmModalProps {
   visible: boolean;
@@ -8,17 +8,8 @@ interface DeleteConfirmModalProps {
   onCancel: () => void;
 }
 
-const DeleteConfirmModal = ({
-  visible,
-  onConfirm,
-  onCancel,
-}: DeleteConfirmModalProps) => (
-  <Modal
-    visible={visible}
-    transparent
-    animationType="fade"
-    onRequestClose={onCancel}
-  >
+const DeleteConfirmModal = ({ visible, onConfirm, onCancel }: DeleteConfirmModalProps) => (
+  <Modal visible={visible} transparent animationType="fade" onRequestClose={onCancel}>
     <S.Overlay>
       <S.Content>
         <S.Title>Confirmar exclusão</S.Title>

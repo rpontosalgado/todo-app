@@ -1,17 +1,17 @@
-jest.mock("@react-native-async-storage/async-storage", () => ({
+jest.mock('@react-native-async-storage/async-storage', () => ({
   getItem: jest.fn(),
   setItem: jest.fn(),
 }));
 
-import React from "react";
-import { render, fireEvent } from "@testing-library/react-native";
-import { TodoList } from "./TodoList";
-import { TodoContext } from "../../contexts/TodoContext";
+import React from 'react';
+import { render, fireEvent } from '@testing-library/react-native';
+import { TodoList } from './TodoList';
+import { TodoContext } from '../../contexts/TodoContext';
 
 const mockContextValue = {
   todos: [
-    { id: "1", name: "First", createdAt: 1000 },
-    { id: "2", name: "Second", createdAt: 2000 },
+    { id: '1', name: 'First', createdAt: 1000 },
+    { id: '2', name: 'Second', createdAt: 2000 },
   ],
   loading: false,
   addTodo: jest.fn(),
@@ -26,125 +26,125 @@ const renderWithContext = (contextValue = mockContextValue) =>
     </TodoContext.Provider>,
   );
 
-describe("TodoList", () => {
+describe('TodoList', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
-  it("should render the title", () => {
+  it('should render the title', () => {
     const { getByText } = renderWithContext();
 
-    expect(getByText("To-Do List")).toBeTruthy();
+    expect(getByText('To-Do List')).toBeTruthy();
   });
 
-  it("should render the input field", () => {
+  it('should render the input field', () => {
     const { getByPlaceholderText } = renderWithContext();
 
-    expect(getByPlaceholderText("Adicionar novo item...")).toBeTruthy();
+    expect(getByPlaceholderText('Adicionar novo item...')).toBeTruthy();
   });
 
-  it("should render the add button", () => {
+  it('should render the add button', () => {
     const { getByText } = renderWithContext();
 
-    expect(getByText("Adicionar")).toBeTruthy();
+    expect(getByText('Adicionar')).toBeTruthy();
   });
 
-  it("should render todo items for each todo", () => {
+  it('should render todo items for each todo', () => {
     const { getByText } = renderWithContext();
 
-    expect(getByText("First")).toBeTruthy();
-    expect(getByText("Second")).toBeTruthy();
+    expect(getByText('First')).toBeTruthy();
+    expect(getByText('Second')).toBeTruthy();
   });
 
-  it("should call addTodo and clear input on submit", () => {
+  it('should call addTodo and clear input on submit', () => {
     const { getByText, getByPlaceholderText } = renderWithContext();
-    const input = getByPlaceholderText("Adicionar novo item...");
+    const input = getByPlaceholderText('Adicionar novo item...');
 
-    fireEvent.changeText(input, "New todo");
-    fireEvent.press(getByText("Adicionar"));
+    fireEvent.changeText(input, 'New todo');
+    fireEvent.press(getByText('Adicionar'));
 
-    expect(mockContextValue.addTodo).toHaveBeenCalledWith("New todo");
-    expect(input.props.value).toBe("");
+    expect(mockContextValue.addTodo).toHaveBeenCalledWith('New todo');
+    expect(input.props.value).toBe('');
   });
 
-  it("should call addTodo on submit editing", () => {
+  it('should call addTodo on submit editing', () => {
     const { getByPlaceholderText } = renderWithContext();
-    const input = getByPlaceholderText("Adicionar novo item...");
+    const input = getByPlaceholderText('Adicionar novo item...');
 
-    fireEvent.changeText(input, "New todo");
-    fireEvent(input, "onSubmitEditing");
+    fireEvent.changeText(input, 'New todo');
+    fireEvent(input, 'onSubmitEditing');
 
-    expect(mockContextValue.addTodo).toHaveBeenCalledWith("New todo");
+    expect(mockContextValue.addTodo).toHaveBeenCalledWith('New todo');
   });
 
-  it("should not call addTodo with empty input", () => {
+  it('should not call addTodo with empty input', () => {
     const { getByText } = renderWithContext();
 
-    fireEvent.press(getByText("Adicionar"));
+    fireEvent.press(getByText('Adicionar'));
 
     expect(mockContextValue.addTodo).not.toHaveBeenCalled();
   });
 
-  it("should not call addTodo with whitespace input", () => {
+  it('should not call addTodo with whitespace input', () => {
     const { getByText, getByPlaceholderText } = renderWithContext();
-    const input = getByPlaceholderText("Adicionar novo item...");
+    const input = getByPlaceholderText('Adicionar novo item...');
 
-    fireEvent.changeText(input, "   ");
-    fireEvent.press(getByText("Adicionar"));
+    fireEvent.changeText(input, '   ');
+    fireEvent.press(getByText('Adicionar'));
 
     expect(mockContextValue.addTodo).not.toHaveBeenCalled();
   });
 
-  it("should render null when context is missing", () => {
+  it('should render null when context is missing', () => {
     const { toJSON } = render(<TodoList />);
 
     expect(toJSON()).toBeNull();
   });
 
-  it("should show delete confirmation modal on Remover press", () => {
+  it('should show delete confirmation modal on Remover press', () => {
     const { getAllByText, getByText, queryByText } = renderWithContext();
 
-    fireEvent.press(getAllByText("Remover")[0]);
+    fireEvent.press(getAllByText('Remover')[0]);
 
-    expect(getByText("Confirmar exclusão")).toBeTruthy();
-    expect(queryByText("Cancelar")).toBeTruthy();
+    expect(getByText('Confirmar exclusão')).toBeTruthy();
+    expect(queryByText('Cancelar')).toBeTruthy();
   });
 
-  it("should delete todo on modal confirmation", () => {
+  it('should delete todo on modal confirmation', () => {
     const { getAllByText } = renderWithContext();
 
-    fireEvent.press(getAllByText("Remover")[0]);
+    fireEvent.press(getAllByText('Remover')[0]);
 
-    const removeButtons = getAllByText("Remover");
+    const removeButtons = getAllByText('Remover');
     const modalRemoveButton = removeButtons[removeButtons.length - 1];
     fireEvent.press(modalRemoveButton);
 
-    expect(mockContextValue.deleteTodo).toHaveBeenCalledWith("1");
+    expect(mockContextValue.deleteTodo).toHaveBeenCalledWith('1');
   });
 
-  it("should cancel delete when dismissing modal", () => {
+  it('should cancel delete when dismissing modal', () => {
     const { getAllByText, getByText, queryByText } = renderWithContext();
 
-    fireEvent.press(getAllByText("Remover")[0]);
-    fireEvent.press(getByText("Cancelar"));
+    fireEvent.press(getAllByText('Remover')[0]);
+    fireEvent.press(getByText('Cancelar'));
 
     expect(mockContextValue.deleteTodo).not.toHaveBeenCalled();
-    expect(queryByText("Confirmar exclusão")).toBeNull();
+    expect(queryByText('Confirmar exclusão')).toBeNull();
   });
 
-  it("should disable add button when input is empty", () => {
+  it('should disable add button when input is empty', () => {
     const { getByText } = renderWithContext();
-    const button = getByText("Adicionar");
+    const button = getByText('Adicionar');
 
     expect(button.props.disabled).toBe(true);
   });
 
-  it("should enable add button when input has text", () => {
+  it('should enable add button when input has text', () => {
     const { getByText, getByPlaceholderText } = renderWithContext();
-    const input = getByPlaceholderText("Adicionar novo item...");
+    const input = getByPlaceholderText('Adicionar novo item...');
 
-    fireEvent.changeText(input, "New todo");
-    const button = getByText("Adicionar");
+    fireEvent.changeText(input, 'New todo');
+    const button = getByText('Adicionar');
 
     expect(button.props.disabled).toBe(false);
   });

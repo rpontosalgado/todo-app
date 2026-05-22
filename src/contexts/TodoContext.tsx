@@ -1,6 +1,6 @@
-import React, { createContext, useState, useEffect, useCallback, useContext } from "react";
-import { Todo } from "../types";
-import { StorageService } from "../services/StorageService";
+import React, { createContext, useState, useEffect, useCallback, useContext } from 'react';
+import { Todo } from '../types';
+import { StorageService } from '../services/StorageService';
 
 export interface TodoContextType {
   todos: Todo[];
@@ -10,21 +10,17 @@ export interface TodoContextType {
   deleteTodo: (id: string) => void;
 }
 
-export const TodoContext = createContext<TodoContextType | undefined>(
-  undefined,
-);
+export const TodoContext = createContext<TodoContextType | undefined>(undefined);
 
 export const useTodoContext = () => {
   const context = useContext(TodoContext);
   if (!context) {
-    throw new Error("useTodoContext must be used within a TodoProvider");
+    throw new Error('useTodoContext must be used within a TodoProvider');
   }
   return context;
 };
 
-export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -54,9 +50,7 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const updateTodo = useCallback(
     async (id: string, name: string) => {
-      const updatedTodos = todos.map((todo) =>
-        todo.id === id ? { ...todo, name } : todo,
-      );
+      const updatedTodos = todos.map(todo => (todo.id === id ? { ...todo, name } : todo));
       await StorageService.saveTodos(updatedTodos);
       setTodos(updatedTodos);
     },
@@ -65,7 +59,7 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const deleteTodo = useCallback(
     async (id: string) => {
-      const updatedTodos = todos.filter((todo) => todo.id !== id);
+      const updatedTodos = todos.filter(todo => todo.id !== id);
       await StorageService.saveTodos(updatedTodos);
       setTodos(updatedTodos);
     },
