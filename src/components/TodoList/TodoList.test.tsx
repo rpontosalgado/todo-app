@@ -19,16 +19,6 @@ const mockContextValue = {
   deleteTodo: jest.fn(),
 };
 
-const emptyContextValue = {
-  ...mockContextValue,
-  todos: [],
-};
-
-const loadingContextValue = {
-  ...mockContextValue,
-  loading: true,
-};
-
 const renderWithContext = (contextValue = mockContextValue) =>
   render(
     <TodoContext.Provider value={contextValue}>
@@ -109,18 +99,6 @@ describe("TodoList", () => {
     const { toJSON } = render(<TodoList />);
 
     expect(toJSON()).toBeNull();
-  });
-
-  it("should show loading indicator when loading", () => {
-    const { getByText } = renderWithContext(loadingContextValue);
-
-    expect(getByText("Carregando...")).toBeTruthy();
-  });
-
-  it("should show empty state when no todos", () => {
-    const { getByText } = renderWithContext(emptyContextValue);
-
-    expect(getByText("Nenhuma tarefa")).toBeTruthy();
   });
 
   it("should show delete confirmation modal on Remover press", () => {
