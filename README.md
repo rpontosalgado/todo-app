@@ -21,7 +21,7 @@ A React Native (Expo) to-do list app built with TypeScript, featuring CRUD opera
 
 ```bash
 # Clone the repository
-git clone <repo-url>
+git clone https://github.com/rpontosalgado/todo-app.git
 cd todo-app
 
 # Install dependencies
@@ -104,4 +104,48 @@ yarn lint:fix
 yarn format
 ```
 
+## Commit & Push Workflow
+  
+This project enforces conventional commits and quality checks via Git hooks (Husky).
+
+| Hook | Trigger | Action |
+|------|---------|--------|
+| `commit-msg` | `git commit` | Validates message format via commitlint |
+| `prepare-commit-msg` | `git commit` | Launches commitizen interactive prompt |
+| `pre-push` | `git push` | Runs linting and all tests |
+
+
 ## Screenshots
+| Empty list | List with items |
+|------------|-----------------|
+| <img width="400" alt="Empty state" src="https://github.com/user-attachments/assets/3b385513-e13d-4392-8343-5a288869eb83" /> | <img width="400" alt="List with items" src="https://github.com/user-attachments/assets/1b13c210-f2f3-4d54-b838-e99385fdd92c" /> |
+
+| Editing an item | Delete confirmation |
+|-----------------|---------------------|
+| <img width="400" alt=" Editing an item" src="https://github.com/user-attachments/assets/d0392ed5-ce0a-471f-a767-f260a46bbae5" /> | <img width="400" alt="Delete confirmation" src="https://github.com/user-attachments/assets/9eb63780-4376-428e-8238-1dac2297dced" /> |
+
+## Pontos de melhoria
+
+### Funcionalidades
+- Categorias ou tags para agrupar tarefas
+- Datas de entrega com notificações
+- Níveis de prioridade (alta, média, baixa)
+- Busca e filtro de tarefas
+- Reordenar lista com drag and drop
+- Tema escuro
+- Desfazer/refazer ações
+- Selecionar múltiplas tarefas e excluir em lote
+
+### Técnico
+- Tema global (cores, espaçamento, tipografia) via styled-components ThemeProvider
+- Pipeline de CI/CD com GitHub Actions
+- Animações nas transições de adicionar/remover itens
+- Melhorias de acessibilidade (leitor de tela)
+- Persistência com banco local
+- Sincronização com backend
+
+### UI/UX
+- Swipe para editar/excluir
+- Pull to refresh
+- Feedback tátil (haptic)
+- Splash screen e ícone do app
