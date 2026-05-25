@@ -1,6 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { Button, FlatList } from 'react-native';
-import { TodoContext } from '../../contexts/TodoContext';
+import { useTodoContext } from '../../contexts/TodoContext';
 import { TodoItem } from '../TodoItem/TodoItem';
 import { LoadingView } from './LoadingView/LoadingView';
 import { EmptyState } from './EmptyState/EmptyState';
@@ -8,11 +8,7 @@ import { DeleteConfirmModal } from './DeleteConfirmModal/DeleteConfirmModal';
 import * as S from './TodoList.styles';
 
 const TodoList = () => {
-  const context = useContext(TodoContext);
-  if (!context) {
-    return null;
-  }
-  const { todos, loading, updateTodo, deleteTodo, addTodo } = context;
+  const { todos, loading, updateTodo, deleteTodo, addTodo } = useTodoContext();
   const [newTodo, setNewTodo] = useState('');
   const [deleteConfirmId, setDeleteConfirmId] = useState<string | null>(null);
 
