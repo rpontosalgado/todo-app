@@ -27,7 +27,7 @@ describe('StorageService', () => {
     expect(AsyncStorage.setItem).toHaveBeenCalledWith('@todo_list_v1', JSON.stringify(mockTodos));
   });
 
-  it('should load todos', async () => {
+  it('should load todos list', async () => {
     (AsyncStorage.getItem as jest.Mock).mockResolvedValue(JSON.stringify(mockTodos));
 
     const loadedTodos = await StorageService.loadTodos();

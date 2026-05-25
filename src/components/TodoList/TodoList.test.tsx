@@ -95,10 +95,14 @@ describe('TodoList', () => {
     expect(mockContextValue.addTodo).not.toHaveBeenCalled();
   });
 
-  it('should render null when context is missing', () => {
-    const { toJSON } = render(<TodoList />);
+  it('should throw when context is missing', () => {
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
 
-    expect(toJSON()).toBeNull();
+    expect(() => render(<TodoList />)).toThrow(
+      'useTodoContext must be used within a TodoProvider',
+    );
+
+    consoleErrorSpy.mockRestore();
   });
 
   it('should show delete confirmation modal on Remover press', () => {
